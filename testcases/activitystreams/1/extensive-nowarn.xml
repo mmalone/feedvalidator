@@ -5,11 +5,11 @@
 
 <!--
   Description:  No errors should be produced by the extensive feed
-  Expect:       !Error
+  Expect:       !Warning
 -->
 
 <feed xmlns="http://www.w3.org/2005/Atom"
-      xmlns:activity="http://activitystrea.ms/spec/1.0">
+    xmlns:activity="http://activitystrea.ms/spec/1.0/">
   <title type="text">dive into mark</title>
   <subtitle type="html">
     A &lt;em&gt;lot&lt;/em&gt; of effort
@@ -20,7 +20,7 @@
   <link rel="alternate" type="text/html"
    hreflang="en" href="http://example.org/"/>
   <link rel="self" type="application/atom+xml"
-   href="http://example.org/feed.atom"/>
+      href="http://www.feedvalidator.org/testcases/activitystreams/1/extensive-nowarn.xml"/>
   <rights>Copyright (c) 2003, Mark Pilgrim</rights>
   <generator uri="http://www.example.com/" version="1.0">
     Example Toolkit

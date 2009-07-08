@@ -71,7 +71,7 @@ namespaces = {
   "http://www.usemod.com/cgi-bin/mb.pl?ModWiki":    "wiki",
   "http://schemas.xmlsoap.org/soap/envelope/":      "soap",
   "http://www.w3.org/2005/Atom":                    "atom",
-  "http://activitystrea.ms/spec/1.0":               "activity",
+  "http://activitystrea.ms/spec/1.0/":               "activity",
   "http://www.w3.org/1999/xhtml":                   "xhtml",
   "http://my.netscape.com/rdf/simple/0.9/":         "rss090",
   "http://purl.org/rss/1.0/":                       "rss1",
