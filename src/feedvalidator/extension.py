@@ -923,6 +923,9 @@ class extension_entry(extension_item):
   def do_trackback_about(self):
     return rfc2396_full()
 
+  def do_activity_object_type(self):
+    return rfc3987_full()
+
 ########################################################################
 #        Extensions that are valid at only at the channel level        #
 ########################################################################
