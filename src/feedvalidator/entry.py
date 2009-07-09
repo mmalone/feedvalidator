@@ -24,7 +24,7 @@ class entry(validatorBase, extension_entry, itunes_item):
   def validate(self):
     if not 'title' in self.children:
       self.log(MissingElement({"parent":self.name, "element":"title"}))
-    if not 'author' in self.children and not 'author' in self.parent.children:
+    if not self.has_author():
       self.log(MissingElement({"parent":self.name, "element":"author"}))
     if not 'id' in self.children:
       self.log(MissingElement({"parent":self.name, "element":"id"}))
@@ -59,6 +59,9 @@ class entry(validatorBase, extension_entry, itunes_item):
         types[link.type] += [link.hreflang]
 
     if self.itunes: itunes_item.validate(self)
+
+  def has_author(self):
+      return 'author' in self.children or 'author' in self.parent.children
 
   def do_author(self):
     from author import author
@@ -111,6 +114,16 @@ class entry(validatorBase, extension_entry, itunes_item):
 
   def do_app_control(self):
     return app_control(), noduplicates()
+
+class activity_object(entry):
+  def has_author(self):
+    return ('author' in self.children or 
+            'author' in self.parent.children or
+            'author' in self.parent.parent.children)
+
+  def do_activity_object(self):
+    # raise attribute error since an entry can have this, but an object can't.
+    raise AttributeError
 
 class app_control(validatorBase):
   def do_app_draft(self):

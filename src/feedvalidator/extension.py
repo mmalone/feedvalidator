@@ -926,6 +926,13 @@ class extension_entry(extension_item):
   def do_activity_object_type(self):
     return rfc3987_full()
 
+  def do_activity_object(self):
+    from entry import activity_object
+    return activity_object()
+
+  def do_activity_verb(self):
+    return rfc3987_full()
+
 ########################################################################
 #        Extensions that are valid at only at the channel level        #
 ########################################################################
