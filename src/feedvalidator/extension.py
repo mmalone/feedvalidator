@@ -933,6 +933,10 @@ class extension_entry(extension_item):
   def do_activity_verb(self):
     return rfc3987_full()
 
+  def do_activity_actor(self):
+    from entry import activity_actor
+    return activity_actor()
+
 ########################################################################
 #        Extensions that are valid at only at the channel level        #
 ########################################################################
@@ -1069,6 +1073,9 @@ class extension_feed(extension_channel):
     return rfc2396_full()
   def do_access_restriction(self):
     return access_restriction()
+  def do_activity_subject(self):
+    from entry import activity_subject
+    return activity_subject()
 
 ########################################################################
 #                              Validators                              #

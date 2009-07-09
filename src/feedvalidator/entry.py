@@ -121,9 +121,37 @@ class activity_object(entry):
             'author' in self.parent.children or
             'author' in self.parent.parent.children)
 
+  # raise attribute error since an entry can have these, but an objects can.
   def do_activity_object(self):
-    # raise attribute error since an entry can have this, but an object can't.
     raise AttributeError
+
+  def do_activity_verb(self):
+    raise AttributeError
+
+class activity_subject_id(canonicaluri):
+  def validate(self):
+    self.parent.__dict__['id'] = self.value
+    return canonicaluri.validate(self)
+
+class activity_subject(activity_object):
+  def validate(self):
+    self.parent.__dict__['activity_subject'] = self
+
+  def do_id(self):
+    return activity_subject_id(), nows(), noduplicates(), unique('id',self.parent,DuplicateEntries)
+
+class activity_actor(activity_object):
+  def validate(self):
+    if not 'id' in self.children:
+      self.log(MissingElement({"parent":self.name, "element":"id"}))
+      return
+    if not (hasattr(self.parent.parent, 'activity_subject') or 
+            self.parent.parent.activity_subject.id != subject.id):
+        return activity_object.validate(self)
+    # TODO: Could check for mismatched data here and return a warning.
+  
+  def do_id(self):
+    return activity_subject_id(), nows(), noduplicates(), unique('id',self.parent,DuplicateEntries)
 
 class app_control(validatorBase):
   def do_app_draft(self):
